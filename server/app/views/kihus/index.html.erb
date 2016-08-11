@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Kihus</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Teban</th>
+      <th>Won</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kihus.each do |kihu| %>
+      <tr>
+        <td><%= kihu.teban %></td>
+        <td><%= kihu.won %></td>
+        <td><%= link_to 'Show', kihu %></td>
+        <td><%= link_to 'Edit', edit_kihu_path(kihu) %></td>
+        <td><%= link_to 'Destroy', kihu, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Kihu', new_kihu_path %>

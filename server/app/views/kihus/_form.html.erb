@@ -1,0 +1,27 @@
+<%= form_for(kihu) do |f| %>
+  <% if kihu.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(kihu.errors.count, "error") %> prohibited this kihu from being saved:</h2>
+
+      <ul>
+      <% kihu.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :teban %>
+    <%= f.text_field :teban %>
+  </div>
+
+  <div class="field">
+    <%= f.label :won %>
+    <%= f.check_box :won %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
