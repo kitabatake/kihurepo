@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @te.content %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @te.comment %>
+</p>
+
+<p>
+  <strong>Kihu:</strong>
+  <%= @te.kihu %>
+</p>
+
+<%= link_to 'Edit', edit_te_path(@te) %> |
+<%= link_to 'Back', tes_path %>
