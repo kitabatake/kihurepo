@@ -1,4 +1,4 @@
-class TesController < ApplicationController
+class MovesController < ApplicationController
   before_action :set_te, only: [:show, :edit, :update, :destroy]
 
   # GET /tes

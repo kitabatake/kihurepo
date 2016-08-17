@@ -1,3 +1,3 @@
 class Kihu < ApplicationRecord
-  has_many :tes
+  has_many :moves
 end
