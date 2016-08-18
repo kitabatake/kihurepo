@@ -1,26 +1,34 @@
 class Kihu < ApplicationRecord
   has_many :moves
 
-  def parse (text)
+  def self.parse (text)
     parsed = KihuParser.new.parse text
-    self.match_date = parsed[:date]
-    self.rule = parsed[:rule]
-    self.handicap = parsed[:handicap]
-    self.sente = parsed[:sente]
-    self.gote = parsed[:gote]
+    result = {
+      :match_date => parsed[:date],
+      rule: parsed[:rule],
+      handicap: parsed[:handicap],
+      sente: parsed[:sente],
+      gote: parsed[:gote]
+    }
 
+    moves = []
     parsed[:moves].each do |move|
-      self.moves.build do |m|
-        m.koma = move[:koma]
-        m.to_x = move[:to][:x]
-        m.to_y = move[:to][:y]
-        m.naru = move[:naru]
-        m.utsu = move[:utsu]
-        unless m.utsu
-          m.from_x = move[:from][:x]
-          m.from_y = move[:from][:y]
-        end
+      m = {
+        koma: move[:koma],
+        to_x: move[:to][:x],
+        to_y: move[:to][:y],
+        naru: move[:naru],
+        utsu: move[:utsu]
+      }
+      unless m[:utsu]
+        m[:from_x] = move[:from][:x]
+        m[:from_y] = move[:from][:y]
       end
+      moves << m
     end
+
+    result[:moves] = moves
+    result
   end
+
 end
