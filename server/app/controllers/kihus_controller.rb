@@ -24,7 +24,8 @@ class KihusController < ApplicationController
   # POST /kihus
   # POST /kihus.json
   def create
-    @kihu = Kihu.new(kihu_params)
+
+    @kihu = Kihu.build_with_params kihu_params
 
     respond_to do |format|
       if @kihu.save
@@ -69,6 +70,11 @@ class KihusController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def kihu_params
-      params.require(:kihu).permit(:teban, :won)
+      _params = params.require(:kihu).permit(:teban, :won, :kihu_text).to_h
+      if _params[:kihu_text]
+        _params.merge! Kihu.parse _params[:kihu_text]
+        _params.delete :kihu_text
+      end
+      _params
     end
 end
