@@ -1,74 +1,74 @@
 class MovesController < ApplicationController
-  before_action :set_te, only: [:show, :edit, :update, :destroy]
+  before_action :set_move, only: [:show, :edit, :update, :destroy]
 
-  # GET /tes
-  # GET /tes.json
+  # GET /moves
+  # GET /moves.json
   def index
-    @tes = Te.all
+    @moves = Move.all
   end
 
-  # GET /tes/1
-  # GET /tes/1.json
+  # GET /moves/1
+  # GET /moves/1.json
   def show
   end
 
-  # GET /tes/new
+  # GET /moves/new
   def new
-    @te = Te.new
+    @move = Move.new
   end
 
-  # GET /tes/1/edit
+  # GET /moves/1/edit
   def edit
   end
 
-  # POST /tes
-  # POST /tes.json
+  # POST /moves
+  # POST /moves.json
   def create
-    @te = Te.new(te_params)
+    @move = Move.new(move_params)
 
     respond_to do |format|
-      if @te.save
-        format.html { redirect_to @te, notice: 'Te was successfully created.' }
-        format.json { render :show, status: :created, location: @te }
+      if @move.save
+        format.html { redirect_to @move, notice: 'Move was successfully created.' }
+        format.json { render :show, status: :created, location: @move }
       else
         format.html { render :new }
-        format.json { render json: @te.errors, status: :unprocessable_entity }
+        format.json { render json: @move.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /tes/1
-  # PATCH/PUT /tes/1.json
+  # PATCH/PUT /moves/1
+  # PATCH/PUT /moves/1.json
   def update
     respond_to do |format|
-      if @te.update(te_params)
-        format.html { redirect_to @te, notice: 'Te was successfully updated.' }
-        format.json { render :show, status: :ok, location: @te }
+      if @move.update(move_params)
+        format.html { redirect_to @move, notice: 'Move was successfully updated.' }
+        format.json { render :show, status: :ok, location: @move }
       else
         format.html { render :edit }
-        format.json { render json: @te.errors, status: :unprocessable_entity }
+        format.json { render json: @move.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /tes/1
-  # DELETE /tes/1.json
+  # DELETE /moves/1
+  # DELETE /moves/1.json
   def destroy
-    @te.destroy
+    @move.destroy
     respond_to do |format|
-      format.html { redirect_to tes_url, notice: 'Te was successfully destroyed.' }
+      format.html { redirect_to moves_url, notice: 'Move was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_te
-      @te = Te.find(params[:id])
+    def set_move
+      @move = Move.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def te_params
-      params.require(:te).permit(:content, :comment, :kihu)
+    def move_params
+      params.require(:move).permit(:content, :comment, :kihu)
     end
 end
