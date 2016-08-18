@@ -10,13 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817010833) do
+ActiveRecord::Schema.define(version: 20160818020648) do
 
   create_table "kihus", force: :cascade do |t|
     t.string   "teban"
     t.boolean  "won"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "match_date"
+    t.string   "rule"
+    t.string   "hadicap"
+    t.string   "sente"
+    t.string   "gote"
   end
 
   create_table "moves", force: :cascade do |t|
