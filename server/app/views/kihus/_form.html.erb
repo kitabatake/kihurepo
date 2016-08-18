@@ -1,32 +1,48 @@
-<%= form_for(kihu) do |f| %>
-  <% if kihu.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(kihu.errors.count, "error") %> prohibited this kihu from being saved:</h2>
+<%= form_for @kihu, :html => { :class => "form-horizontal kihu" } do |f| %>
 
-      <ul>
-      <% kihu.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @kihu.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@kihu.errors.count, "error") %> prohibited this kihu from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @kihu.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :teban %>
-    <%= f.text_field :teban %>
+  <div class="form-group">
+    <%= f.label :teban, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :teban, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:teban) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :won, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.check_box :won, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:won) %>
+  </div>
+  <div class="form-group">
+    <%= f.label '棋譜', :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_area :kihu_text, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:match_date) %>
   </div>
 
-  <div class="field">
-    <%= f.label :won %>
-    <%= f.check_box :won %>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                kihus_path, :class => 'btn btn-default' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label '棋譜' %>
-    <%= f.text_area :kihu_text %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
