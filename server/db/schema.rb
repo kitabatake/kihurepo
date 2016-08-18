@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160818020648) do
+ActiveRecord::Schema.define(version: 20160818025231) do
 
   create_table "kihus", force: :cascade do |t|
     t.string   "teban"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20160818020648) do
     t.datetime "updated_at", null: false
     t.datetime "match_date"
     t.string   "rule"
-    t.string   "hadicap"
+    t.string   "handicap"
     t.string   "sente"
     t.string   "gote"
   end
