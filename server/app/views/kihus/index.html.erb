@@ -21,7 +21,7 @@
     <% @kihus.each do |kihu| %>
       <tr>
         <td><%= link_to kihu.id, kihu_path(kihu) %></td>
-        <td><%= kihu.teban %></td>
+        <td><%= kihu.teban.label %></td>
         <td><%= kihu.won %></td>
         <td><%= kihu.match_date %></td>
         <td><%= kihu.rule %></td>

@@ -70,7 +70,7 @@ class KihusController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def kihu_params
-      _params = params.require(:kihu).permit(:teban, :won, :kihu_text).to_h
+      _params = params.require(:kihu).permit(:teban_id, :won, :kihu_text).to_h
       if _params[:kihu_text]
         _params.merge! Kihu.parse _params[:kihu_text]
         _params.delete :kihu_text

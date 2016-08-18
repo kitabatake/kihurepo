@@ -1,5 +1,7 @@
 class Kihu < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
   has_many :moves, :dependent => :destroy
+  belongs_to :teban
 
   attr_accessor :kihu_text
 
