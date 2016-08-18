@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :tes
-  resources :kihus
+  resources :moves
+  resources :kihus do
+    collection do
+      post 'confirm'
+    end
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -1,0 +1,14 @@
+<p id="notice">以下の内容で登録してよろしいでしょうか？</p>
+
+<p>
+  <strong>Teban:</strong>
+  <%= @kihu.teban %>
+</p>
+
+<p>
+  <strong>Won:</strong>
+  <%= @kihu.won %>
+</p>
+
+<%= link_to '戻る', new_kihu_path %> |
+<%= link_to 'OK', kihus_path, :method => 'post' %>
