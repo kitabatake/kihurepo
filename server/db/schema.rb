@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160818025231) do
+ActiveRecord::Schema.define(version: 20160818031829) do
 
   create_table "kihus", force: :cascade do |t|
     t.string   "teban"
@@ -25,11 +25,18 @@ ActiveRecord::Schema.define(version: 20160818025231) do
   end
 
   create_table "moves", force: :cascade do |t|
-    t.string   "content"
     t.string   "comment"
     t.integer  "kihu_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "koma"
+    t.integer  "from_x"
+    t.integer  "from_y"
+    t.integer  "to_x"
+    t.integer  "to_y"
+    t.integer  "time"
+    t.boolean  "naru"
+    t.boolean  "utsu"
     t.index ["kihu_id"], name: "index_moves_on_kihu_id"
   end
 
