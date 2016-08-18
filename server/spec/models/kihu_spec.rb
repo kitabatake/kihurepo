@@ -10,7 +10,7 @@ RSpec.describe Kihu, :type => :model do
       expect(kihu.handicap).to eq '平手'
       expect(kihu.sente).to eq 'sente'
       expect(kihu.gote).to eq 'gote'
-      # expect(kihu.raw_moves.size).to eq 140
+      expect(kihu.moves.size).to eq 140
     end
   end
 end
