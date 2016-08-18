@@ -1,3 +1,8 @@
+PATH
+  remote: ../../kihu_parser
+  specs:
+    kihu_parser (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -177,6 +182,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)
   jquery-rails
+  kihu_parser!
   listen (~> 3.0.5)
   puma (~> 3.0)
   rails (~> 5.0.0)
