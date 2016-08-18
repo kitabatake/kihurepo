@@ -14,18 +14,7 @@ class KihusController < ApplicationController
 
   # GET /kihus/new
   def new
-    if session[:kihu]
-      @kihu = Kihu.new session[:kihu]
-    else
-      @kihu = Kihu.new
-    end
-  end
-
-  # POT /kihus/confirm
-  def confirm
-    session[:kihu] = kihu_params
-    @kihu = Kihu.new(kihu_params)
-    redirect_to :new if @kihu.invalid?
+    @kihu = Kihu.new
   end
 
   # GET /kihus/1/edit
@@ -35,11 +24,10 @@ class KihusController < ApplicationController
   # POST /kihus
   # POST /kihus.json
   def create
-    @kihu = Kihu.new(session[:kihu])
+    @kihu = Kihu.new(kihu_params)
 
     respond_to do |format|
       if @kihu.save
-        session[:kihu] = nil
         format.html { redirect_to @kihu, notice: 'Kihu was successfully created.' }
         format.json { render :show, status: :created, location: @kihu }
       else
