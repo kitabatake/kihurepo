@@ -1,4 +1,4 @@
-class Teban < ActiveHash::Base
+class KomaType < ActiveHash::Base
   self.data = [
     {:id => 1, :name => 'hu'},
     {:id => 2, :name => 'keima'},
@@ -15,4 +15,10 @@ class Teban < ActiveHash::Base
     {:id => 13, :name => 'ryuu'},
     {:id => 14, :name => 'uma'},
   ]
+
+  def self.get_by_name (name)
+    target = nil
+    data.each {|kt| target = kt if kt[:name] == name}
+    target
+  end
 end
