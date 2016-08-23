@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: {
-    'kihus/show': './kihus/show.js',
+    'kihus/show': './kihus/show/index.js',
     vendor: ['react', 'react-dom']
   },
   output: { 
