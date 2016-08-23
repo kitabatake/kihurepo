@@ -10,6 +10,7 @@ class KihusController < ApplicationController
   # GET /kihus/1
   # GET /kihus/1.json
   def show
+    gon.moves = @kihu.moves
   end
 
   # GET /kihus/new
