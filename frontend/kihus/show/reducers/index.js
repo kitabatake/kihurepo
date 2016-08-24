@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 
-import movesNumber from './moves_number.js'
+import moves from './moves.js'
 import komas from './komas.js'
 
 const reducer = combineReducers({
-  movesNumber,
+  moves,
   komas
 })
 
