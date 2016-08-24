@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {createStore, applyMiddleware} from 'redux'
-import { Provider } from 'react-redux'
-import App from './containers/app.jsx'
+import {Provider} from 'react-redux'
 
+import App from './containers/app.jsx'
 import reducer from './reducers/index.js'
+import {initiatesKomas} from './actions/komas.js'
 
 var store = createStore(reducer)
-console.log(store.getState())
 
 const render = () => {
   ReactDOM.render(
@@ -20,3 +20,4 @@ const render = () => {
 
 render()
 store.subscribe(render)
+initiatesKomas(store.dispatch)

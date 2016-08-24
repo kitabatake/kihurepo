@@ -30,3 +30,7 @@
   margin-top: 50px;
 
 }
+
+.gote_koma {
+  transform: rotate(180deg);
+}

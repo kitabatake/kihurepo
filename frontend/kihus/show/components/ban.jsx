@@ -48,11 +48,9 @@ const convertY = (y) => {
 const stateToProps = (state) => {
   var komas = []
   for (let i = 0; i < 9; i++) komas[i] = []
-
-  komas[4][5] = {
-    owner: 'sente',
-    name: '歩'
-  }
+  state.komas.forEach(koma => {
+    komas[convertY(koma.y)][convertX(koma.x)] = koma
+  })
 
   return {
     komas: komas

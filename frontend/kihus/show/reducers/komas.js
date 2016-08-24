@@ -2,7 +2,7 @@ const getDefaultKomasEachOwner = (owner, getY) => {
   var komas = []
   for (let i = 0; i < 9; i++) {
     komas.push({
-      x: 1, y: getY(7), name: 'hu', owner: owner, motigoma: false
+      x: (i + 1), y: getY(7), name: '歩', owner: owner, motigoma: false
     })
   }
   return komas
