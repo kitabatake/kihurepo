@@ -37,6 +37,14 @@ var Ban = React.createClass({
   }
 })
 
+const convertX = (x) => {
+  return Math.abs(9 - x)
+}
+
+const convertY = (y) => {
+  return y - 1
+}
+
 const stateToProps = (state) => {
   var komas = []
   for (let i = 0; i < 9; i++) komas[i] = []
