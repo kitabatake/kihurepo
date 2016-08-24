@@ -45,7 +45,7 @@ const convertY = (y) => {
   return y - 1
 }
 
-const stateToProps = (state) => {
+const mapStateToProps = (state) => {
   var komas = []
   for (let i = 0; i < 9; i++) komas[i] = []
   state.komas.forEach(koma => {
@@ -58,7 +58,7 @@ const stateToProps = (state) => {
 }
 
 Ban = connect(
-  stateToProps
+  mapStateToProps
 )(Ban)
 
 export default Ban

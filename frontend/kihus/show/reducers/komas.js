@@ -20,10 +20,33 @@ const getDefaultKomas = () => {
   return [...senteKomas, ...goteKomas]
 }
 
-const komas = (state = [], action) => {
+export const getKomaByPosition = (komas, x, y) => {
+  var target = null
+  komas.forEach(koma => {
+    if (koma.x == x && koma.y == y) target = koma
+  })
+  return target
+}
+
+const applyMove = (komas, move) => {
+  var target = getKomaByPosition(komas, move.from_x, move.from_y)
+  console.log(target)
+  // todo raise koma not found exception
+
+  target.x = move.to_x
+  target.y = move.to_y
+  // TODO toru, utsu
+}
+
+const komas = (state = [], action, move) => {
   switch(action.type) {
     case 'initiate_komas':
       return getDefaultKomas()
+      break
+    case 'next_move':
+      applyMove(state, move)
+      return state
+      break
     default:
       return state
   }
