@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+
+
+#ban {
+  border: 1px solid #ddd;
+  border-collapse: collapse;
+}
+
+#ban td {
+  border: 1px solid #ddd;
+  width: 34px;
+  height: 40px;
+}
+
+#moves-container {
+  margin-top: 50px;
+
+}
