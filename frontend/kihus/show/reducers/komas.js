@@ -43,7 +43,7 @@ export const getKomaByPosition = (komas, x, y) => {
   return target
 }
 
-const applyMove = (komas, move) => {
+const applyNextMove = (komas, move) => {
   var target = getKomaByPosition(komas, move.from_x, move.from_y)
   // todo raise koma not found exception
 
@@ -53,13 +53,27 @@ const applyMove = (komas, move) => {
   // TODO toru, utsu
 }
 
+const applyPrevMove = (komas, move) => {
+  var target = getKomaByPosition(komas, move.to_x, move.to_y)
+  // todo raise koma not found exception
+
+  target.name = move.koma // corresponds naru process it to change koma name
+  target.x = move.from_x
+  target.y = move.from_y
+  // TODO toru, utsu
+}
+
 const komas = (state = [], action, move) => {
   switch(action.type) {
     case 'initiate_komas':
       return getDefaultKomas()
       break
     case 'next_move':
-      applyMove(state, move)
+      applyNextMove(state, move)
+      return state
+      break
+    case 'prev_move':
+      applyPrevMove(state, move)
       return state
       break
     default:

@@ -1,9 +1,17 @@
 import { combineReducers } from 'redux'
 import komas from './komas.js'
 
-const getMove = (index) => {
-  return index == 0? null : gon.moves[index - 1]
+const getMoveForKomas = (index, action) => {
+  switch(action.type) {
+    case 'next_move':
+      return index == 0? null : gon.moves[index - 1]
+      break
+    case 'prev_move':
+      return gon.moves[index]
+      break
+  }
 }
+
 
 const movesIndex = (state, action) => {
   switch(action.type) {
@@ -25,7 +33,7 @@ const reducer = (state = {
 }, action) => {
   var nextState = {}
   nextState.movesIndex = movesIndex(state.movesIndex, action)
-  nextState.komas = komas(state.komas, action, getMove(nextState.movesIndex))
+  nextState.komas = komas(state.komas, action, getMoveForKomas(nextState.movesIndex, action))
   return nextState
 };
 
