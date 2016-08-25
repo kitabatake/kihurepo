@@ -49,6 +49,29 @@ describe('reducers/komas', () => {
       after = fromKomas.getKomaByPosition(moved, 7, 6)
       expect(after).to.be(before)
     })
+
+    it('should process toru', () => {
+      var defaults = reducer([], {
+        type: 'initiate_komas'
+      })
+
+      var torareruKoma = fromKomas.getKomaByPosition(defaults, 7, 3)
+      reducer(
+        defaults,
+        {
+          type: 'next_move'
+        },
+        {
+          from_x: 7,
+          from_y: 7,
+          to_x: 7,
+          to_y: 3
+        }
+      )
+
+      expect(torareruKoma.owner).to.be('sente')
+      expect(torareruKoma.motigoma).to.be(true)
+    })
   })
 
   describe('prev_move action', () => {

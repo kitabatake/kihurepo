@@ -47,10 +47,16 @@ const applyNextMove = (komas, move) => {
   var target = getKomaByPosition(komas, move.from_x, move.from_y)
   // todo raise koma not found exception
 
+  var toruKoma = getKomaByPosition(komas, move.to_x, move.to_y)
+  if (toruKoma) {
+    toruKoma.motigoma = true
+    toruKoma.owner = target.owner
+  }
+
   target.name = move.koma // corresponds naru process it to change koma name
   target.x = move.to_x
   target.y = move.to_y
-  // TODO toru, utsu
+  // TODO utsu
 }
 
 const applyPrevMove = (komas, move) => {
@@ -60,7 +66,7 @@ const applyPrevMove = (komas, move) => {
   target.name = move.koma // corresponds naru process it to change koma name
   target.x = move.from_x
   target.y = move.from_y
-  // TODO toru, utsu
+  // TODO utsu
 }
 
 const komas = (state = [], action, move) => {
