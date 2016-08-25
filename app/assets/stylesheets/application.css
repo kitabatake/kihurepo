@@ -34,3 +34,7 @@
 .gote_koma {
   transform: rotate(180deg);
 }
+
+#moves-operator {
+  margin: 20px auto 50px;
+}
