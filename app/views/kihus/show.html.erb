@@ -3,35 +3,40 @@
   <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:teban) %>:</strong></dt>
-  <dd><%= @kihu.teban.label %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:won) %>:</strong></dt>
-  <dd><%= @kihu.won %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:match_date) %>:</strong></dt>
-  <dd><%= @kihu.match_date %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:rule) %>:</strong></dt>
-  <dd><%= @kihu.rule %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:handicap) %>:</strong></dt>
-  <dd><%= @kihu.handicap %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:sente) %>:</strong></dt>
-  <dd><%= @kihu.sente %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:gote) %>:</strong></dt>
-  <dd><%= @kihu.gote %></dd>
-</dl>
+<div class='row'>
+  <div class='col-sm-5'>
+    <dl class="dl-horizontal">
+      <dt><strong><%= model_class.human_attribute_name(:teban) %>:</strong></dt>
+      <dd><%= @kihu.teban.label %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:won) %>:</strong></dt>
+      <dd><%= @kihu.won %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:match_date) %>:</strong></dt>
+      <dd><%= @kihu.match_date %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:rule) %>:</strong></dt>
+      <dd><%= @kihu.rule %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:handicap) %>:</strong></dt>
+      <dd><%= @kihu.handicap %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:sente) %>:</strong></dt>
+      <dd><%= @kihu.sente %></dd>
+      <dt><strong><%= model_class.human_attribute_name(:gote) %>:</strong></dt>
+      <dd><%= @kihu.gote %></dd>
+    </dl>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              kihus_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_kihu_path(@kihu), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              kihu_path(@kihu),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+    <%= link_to t('.back', :default => t("helpers.links.back")),
+                  kihus_path, :class => 'btn btn-default'  %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                  edit_kihu_path(@kihu), :class => 'btn btn-default' %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                  kihu_path(@kihu),
+                  :method => 'delete',
+                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                  :class => 'btn btn-danger' %>
+  </div>
 
-<div id='moves-container'></div>
-
+  <div class='col-sm-7'>
+    <div id='moves-container'></div>
+  </div>
+</div>
 
 <%= javascript_include_tag 'webpack/vendor.bundle' %>
 <%= javascript_include_tag 'webpack/kihus/show.bundle' %>
