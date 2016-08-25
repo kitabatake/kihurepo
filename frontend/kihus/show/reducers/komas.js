@@ -4,19 +4,20 @@ const getDefaultKomasEachOwner = (owner, getX, getY) => {
     komas.push({
       x: getX(i + 1), y: getY(7), name: 'hu', owner: owner, motigoma: false
     })
-
-    komas.push({x: getX(1), y: getY(9), name: 'kyousya', owner: owner, motigoma: false})
-    komas.push({x: getX(2), y: getY(9), name: 'keima', owner: owner, motigoma: false})
-    komas.push({x: getX(3), y: getY(9), name: 'gin', owner: owner, motigoma: false})
-    komas.push({x: getX(4), y: getY(9), name: 'kin', owner: owner, motigoma: false})
-    komas.push({x: getX(5), y: getY(9), name: 'ou', owner: owner, motigoma: false})
-    komas.push({x: getX(6), y: getY(9), name: 'kin', owner: owner, motigoma: false})
-    komas.push({x: getX(7), y: getY(9), name: 'gin', owner: owner, motigoma: false})
-    komas.push({x: getX(8), y: getY(9), name: 'keima', owner: owner, motigoma: false})
-    komas.push({x: getX(9), y: getY(9), name: 'kyousya', owner: owner, motigoma: false})
-    komas.push({x: getX(2), y: getY(8), name: 'hisya', owner: owner, motigoma: false})
-    komas.push({x: getX(8), y: getY(8), name: 'kaku', owner: owner, motigoma: false})
   }
+
+  komas.push({x: getX(1), y: getY(9), name: 'kyousya', owner: owner, motigoma: false})
+  komas.push({x: getX(2), y: getY(9), name: 'keima', owner: owner, motigoma: false})
+  komas.push({x: getX(3), y: getY(9), name: 'gin', owner: owner, motigoma: false})
+  komas.push({x: getX(4), y: getY(9), name: 'kin', owner: owner, motigoma: false})
+  komas.push({x: getX(5), y: getY(9), name: 'ou', owner: owner, motigoma: false})
+  komas.push({x: getX(6), y: getY(9), name: 'kin', owner: owner, motigoma: false})
+  komas.push({x: getX(7), y: getY(9), name: 'gin', owner: owner, motigoma: false})
+  komas.push({x: getX(8), y: getY(9), name: 'keima', owner: owner, motigoma: false})
+  komas.push({x: getX(9), y: getY(9), name: 'kyousya', owner: owner, motigoma: false})
+  komas.push({x: getX(2), y: getY(8), name: 'hisya', owner: owner, motigoma: false})
+  komas.push({x: getX(8), y: getY(8), name: 'kaku', owner: owner, motigoma: false})
+
   return komas
 }
 
