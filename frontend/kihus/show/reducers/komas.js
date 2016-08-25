@@ -82,3 +82,21 @@ const komas = (state = [], action, move) => {
 }
 
 export default komas
+
+
+// Selectors
+// http://redux.js.org/docs/recipes/ComputingDerivedData.html
+
+const convertX = (x) => Math.abs(9 - x)
+const convertY = (y) =>  y - 1
+
+export const getOnBanKomas = (state) => {
+  var komas = []
+  for (let i = 0; i < 9; i++) komas[i] = []
+  state.forEach(koma => {
+    if (koma.motigoma) return
+    komas[convertY(koma.y)][convertX(koma.x)] = koma
+  })
+  
+  return komas
+}

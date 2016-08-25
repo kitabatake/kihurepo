@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import komas from './komas.js'
+import komas, * as fromKomas from './komas.js'
 
 const getMoveForKomas = (index, action) => {
   switch(action.type) {
@@ -38,3 +38,8 @@ const reducer = (state = {
 };
 
 export default reducer
+
+
+export const getOnBanKomas = (state) => {
+  return fromKomas.getOnBanKomas(state.komas)
+}

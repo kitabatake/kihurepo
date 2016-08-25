@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Koma from './koma.jsx'
+import { getOnBanKomas } from '../reducers/index.js'
 
 var Ban = React.createClass({
   getGrids: function() {
@@ -37,23 +38,10 @@ var Ban = React.createClass({
   }
 })
 
-const convertX = (x) => {
-  return Math.abs(9 - x)
-}
-
-const convertY = (y) => {
-  return y - 1
-}
 
 const mapStateToProps = (state) => {
-  var komas = []
-  for (let i = 0; i < 9; i++) komas[i] = []
-  state.komas.forEach(koma => {
-    komas[convertY(koma.y)][convertX(koma.x)] = koma
-  })
-
   return {
-    komas: komas
+    komas: getOnBanKomas(state)
   }
 }
 
