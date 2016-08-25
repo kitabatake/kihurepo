@@ -97,6 +97,13 @@ export const getOnBanKomas = (state) => {
     if (koma.motigoma) return
     komas[convertY(koma.y)][convertX(koma.x)] = koma
   })
-  
+  return komas
+}
+
+export const getMotigomas = (state, owner) => {
+  var komas = []
+  state.forEach(koma => {
+    if (koma.motigoma && koma.owner === owner) komas.push(koma)
+  })
   return komas
 }

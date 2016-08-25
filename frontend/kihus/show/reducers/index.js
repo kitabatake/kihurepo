@@ -40,6 +40,13 @@ const reducer = (state = {
 export default reducer
 
 
+// Selectors
+// http://redux.js.org/docs/recipes/ComputingDerivedData.html
+
 export const getOnBanKomas = (state) => {
   return fromKomas.getOnBanKomas(state.komas)
+}
+
+export const getMotigomas = (state, owner) => {
+  return fromKomas.getMotigomas(state.komas, owner)
 }
