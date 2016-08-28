@@ -5,10 +5,10 @@ import { nextMove, prevMove } from '../actions/moves.js'
 
 var Operator = React.createClass({
   handleNextMove: function() {
-    this.props.nextMove()
+    this.props.nextMove(this.props.movesIndex)
   },
   handlePrevMove: function() {
-    this.props.prevMove()
+    this.props.prevMove(this.props.movesIndex)
   },
   render: function() {
     return <div id='moves-operator' >
@@ -22,13 +22,15 @@ var Operator = React.createClass({
   }
 })
 
+const mapStateToProps = (state) => {movesIndex: state.movesIndex}
+
 const dispatchProps = (dispatch) => {
   return {
-    nextMove: () => {
-      nextMove(dispatch)
+    nextMove: (movesIndex) => {
+      nextMove(dispatch, movesIndex)
     },
     prevMove: () => {
-      prevMove(dispatch)
+      prevMove(dispatch, movesIndex)
     }
   }
 }

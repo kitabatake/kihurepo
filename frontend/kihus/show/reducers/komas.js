@@ -102,17 +102,17 @@ const applyPrevMove = (komas, move) => {
   }
 }
 
-const komas = (state = [], action, move) => {
+const komas = (state = [], action) => {
   switch(action.type) {
     case 'initiate_komas':
       return getDefaultKomas()
       break
     case 'next_move':
-      applyNextMove(state, move)
+      applyNextMove(state, action.move)
       return state
       break
     case 'prev_move':
-      applyPrevMove(state, move)
+      applyPrevMove(state, action.move)
       return state
       break
     default:

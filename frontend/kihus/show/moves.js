@@ -15,7 +15,7 @@ class Moves {
     this.gotKomasEachMoves[moveId] = koma
   }
 
-  getMoveForKomas(index) {
+  getMove(index) {
     if (index < 0 || index >= this.moves.length) {
       return null
     }

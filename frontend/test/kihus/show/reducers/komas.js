@@ -13,28 +13,28 @@ const initMotigomaCase = () => {
   state = reducer(
     state,
     {
-      type: 'next_move'
-    },
-    {
-      num: 1,
-      from_x: 7,
-      from_y: 7,
-      to_x: 7,
-      to_y: 3
+      type: 'next_move',
+        move: {
+        num: 1,
+        from_x: 7,
+        from_y: 7,
+        to_x: 7,
+        to_y: 3
+      }
     }
   )
 
   return reducer(
     state,
     {
-      type: 'next_move'
-    },
-    {
-      num: 2,
-      from_x: 1,
-      from_y: 3,
-      to_x: 1,
-      to_y: 4
+      type: 'next_move',
+      move: {
+        num: 2,
+        from_x: 1,
+        from_y: 3,
+        to_x: 1,
+        to_y: 4
+      }
     }
   )
 }
@@ -74,14 +74,14 @@ describe('reducers/komas', () => {
       var moved = reducer(
         defaults,
         {
-          type: 'next_move'
-        },
-        {
-          num: 1,
-          from_x: 7,
-          from_y: 7,
-          to_x: 7,
-          to_y: 6
+          type: 'next_move',
+          move: {
+            num: 1,
+            from_x: 7,
+            from_y: 7,
+            to_x: 7,
+            to_y: 6
+          }
         }
       )
 
@@ -98,14 +98,14 @@ describe('reducers/komas', () => {
       reducer(
         defaults,
         {
-          type: 'next_move'
-        },
-        {
-          num: 1,
-          from_x: 7,
-          from_y: 7,
-          to_x: 7,
-          to_y: 3
+          type: 'next_move',
+          move: {
+            num: 1,
+            from_x: 7,
+            from_y: 7,
+            to_x: 7,
+            to_y: 3
+          }
         }
       )
 
@@ -118,16 +118,16 @@ describe('reducers/komas', () => {
       state = reducer(
         state,
         {
-          type: 'next_move'
-        },
-        {
-          num: 3,
-          from_x: null,
-          from_y: null,
-          to_x: 5,
-          to_y: 5,
-          koma: 'hu',
-          utsu: true
+          type: 'next_move',
+          move: {
+            num: 3,
+            from_x: null,
+            from_y: null,
+            to_x: 5,
+            to_y: 5,
+            koma: 'hu',
+            utsu: true
+          }
         }
       )
 
@@ -148,14 +148,14 @@ describe('reducers/komas', () => {
       var moved = reducer(
         defaults,
         {
-          type: 'prev_move'
-        },
-        {
-          num: 1,
-          from_x: 7,
-          from_y: 8,
-          to_x: 7,
-          to_y: 7
+          type: 'prev_move',
+          move: {
+            num: 1,
+            from_x: 7,
+            from_y: 8,
+            to_x: 7,
+            to_y: 7
+          }
         }
       )
 
@@ -179,9 +179,9 @@ describe('reducers/komas', () => {
       reducer(
         defaults,
         {
-          type: 'next_move'
-        },
-        move
+          type: 'next_move',
+          move: move
+        }
       )
 
       expect(torareruKoma.owner).to.be('sente')
@@ -190,9 +190,9 @@ describe('reducers/komas', () => {
       reducer(
         defaults,
         {
-          type: 'prev_move'
-        },
-        move
+          type: 'prev_move',
+          move: move
+        }
       )
 
       expect(torareruKoma.owner).to.be('gote')
@@ -214,9 +214,9 @@ describe('reducers/komas', () => {
       state = reducer(
         state,
         {
-          type: 'next_move'
-        },
-        move
+          type: 'next_move',
+          move: move
+        }
       )
 
       var hu = fromKomas.getKomaByPosition(state, 5, 5)
@@ -227,9 +227,9 @@ describe('reducers/komas', () => {
       state = reducer(
         state,
         {
-          type: 'prev_move'
-        },
-        move
+          type: 'prev_move',
+          move: move
+        }
       )
 
       expect(hu.x).to.be(null)
