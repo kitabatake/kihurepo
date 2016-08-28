@@ -1,4 +1,5 @@
 import moves from '../moves'
+import koma from './koma.js'
 
 const getDefaultKomasEachOwner = (owner, getX, getY) => {
   var komas = []
@@ -39,13 +40,13 @@ const getDefaultKomas = () => {
 
 export const getKomaByPosition = (komas, x, y) => {
   var target = null
-  komas.forEach(koma => {
-    if (koma.x == x && koma.y == y) target = koma
+  komas.forEach(k => {
+    if (k.x == x && k.y == y) target = k
   })
   return target
 }
 
-const getKomadaiKoma = (komas, name, owner) => {
+export const getKomadaiKoma = (komas, name, owner) => {
   var target = null
   komas.forEach(koma => {
     if (koma.motigoma && koma.name === name && koma.owner === owner) target = koma
@@ -53,53 +54,65 @@ const getKomadaiKoma = (komas, name, owner) => {
   return target
 }
 
-const applyNextMove = (komas, move) => {
-  var target
-  if (move.utsu) {
-    target = getKomadaiKoma(komas, move.koma, moves.NumToOwner(move.num))
-  }
-  else {
-    target = getKomaByPosition(komas, move.from_x, move.from_y)
-  }
+const applyNextMove = (komas, action) => {
+  var move = action.move
+  return komas.map(k => {
+    // todo utsu case
+    return koma(k, action)
+  })
 
-  var toruKoma = getKomaByPosition(komas, move.to_x, move.to_y)
-  if (toruKoma) {
-    toruKoma.motigoma = true
-    toruKoma.x = null
-    toruKoma.y = null
-    toruKoma.owner = target.owner
-    moves.setGotKoma(move.id, toruKoma)
-  }
+  // var target
+  // if (move.utsu) {
+  //   target = getKomadaiKoma(komas, move.koma, moves.NumToOwner(move.num))
+  // }
+  // else {
+  //   target = getKomaByPosition(komas, move.from_x, move.from_y)
+  // }
 
-  target.name = move.koma // corresponds naru process it to change koma name
-  target.x = move.to_x
-  target.y = move.to_y
+  // var toruKoma = getKomaByPosition(komas, move.to_x, move.to_y)
+  // if (toruKoma) {
+  //   toruKoma.motigoma = true
+  //   toruKoma.x = null
+  //   toruKoma.y = null
+  //   toruKoma.owner = target.owner
+  //   moves.setGotKoma(move.id, toruKoma)
+  // }
 
-  if (move.utsu) {
-    target.motigoma = false
-  }
+  // target.name = move.koma // corresponds naru process it to change koma name
+  // target.x = move.to_x
+  // target.y = move.to_y
+
+  // if (move.utsu) {
+  //   target.motigoma = false
+  // }
 }
 
-const toggleOwner = (owner) => owner === 'sente'? 'gote' : 'sente'
 
-const applyPrevMove = (komas, move) => {
-  var target = getKomaByPosition(komas, move.to_x, move.to_y)
 
-  var gotKoma = moves.getGotKomaOnMove(move.id)
-  if (gotKoma) {
-    gotKoma.motigoma = false
-    gotKoma.x = move.to_x
-    gotKoma.y = move.to_y
-    gotKoma.owner = toggleOwner(gotKoma.owner)
-  }
+const applyPrevMove = (komas, action) => {
+  var move = action.move
+  return komas.map(k => {
+    // todo utsu case
+    return koma(k, action)
+  })
+  
+  // var target = getKomaByPosition(komas, move.to_x, move.to_y)
 
-  target.name = move.koma // corresponds naru process it to change koma name
-  target.x = move.from_x
-  target.y = move.from_y
+  // var gotKoma = moves.getGotKomaOnMove(move.id)
+  // if (gotKoma) {
+  //   gotKoma.motigoma = false
+  //   gotKoma.x = move.to_x
+  //   gotKoma.y = move.to_y
+  //   gotKoma.owner = toggleOwner(gotKoma.owner)
+  // }
 
-  if (move.utsu) {
-    target.motigoma = true
-  }
+  // target.name = move.koma // corresponds naru process it to change koma name
+  // target.x = move.from_x
+  // target.y = move.from_y
+
+  // if (move.utsu) {
+  //   target.motigoma = true
+  // }
 }
 
 const komas = (state = [], action) => {
@@ -108,12 +121,10 @@ const komas = (state = [], action) => {
       return getDefaultKomas()
       break
     case 'next_move':
-      applyNextMove(state, action.move)
-      return state
+      return applyNextMove(state, action)
       break
     case 'prev_move':
-      applyPrevMove(state, action.move)
-      return state
+      return applyPrevMove(state, action)
       break
     default:
       return state
