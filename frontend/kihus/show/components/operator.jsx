@@ -22,7 +22,9 @@ var Operator = React.createClass({
   }
 })
 
-const mapStateToProps = (state) => {movesIndex: state.movesIndex}
+const mapStateToProps = (state) => {
+  return {movesIndex: state.movesIndex}
+}
 
 const dispatchProps = (dispatch) => {
   return {
@@ -36,7 +38,7 @@ const dispatchProps = (dispatch) => {
 }
 
 Operator = connect(
-  null,
+  mapStateToProps,
   dispatchProps
 )(Operator)
 

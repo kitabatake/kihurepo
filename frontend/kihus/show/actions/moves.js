@@ -3,10 +3,10 @@ import moves from '../moves.js'
 const getMove = (movesIndex, type) => {
   switch(type) {
     case 'next_move':
-      return moves.getMoveForKomas(movesIndex - 1)
+      return moves.getMove(movesIndex - 1)
       break
     case 'prev_move':
-      return moves.getMoveForKomas(movesIndex)
+      return moves.getMove(movesIndex)
       break
   }
 }
