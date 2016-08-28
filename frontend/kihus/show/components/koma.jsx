@@ -7,6 +7,7 @@ const komaNames = {
   gin: '銀',
   kin: '金',
   ou: '王',
+  gyoku: '王',
   hisya: '飛',
   kaku: '角',
 

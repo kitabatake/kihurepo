@@ -1,3 +1,5 @@
+import moves from '../moves'
+
 const getDefaultKomasEachOwner = (owner, getX, getY) => {
   var komas = []
   for (let i = 0; i < 9; i++) {
@@ -43,30 +45,58 @@ export const getKomaByPosition = (komas, x, y) => {
   return target
 }
 
+const getKomadaiKoma = (name, owner) => {
+  var target = null
+  komas.forEach(koma => {
+    if (koma.motigoma && koma.name === name && koma.owner === owner) target = koma
+  })
+  target
+}
+
 const applyNextMove = (komas, move) => {
   var target = getKomaByPosition(komas, move.from_x, move.from_y)
-  // todo raise koma not found exception
+  // if uts get koma by name from komadai
 
   var toruKoma = getKomaByPosition(komas, move.to_x, move.to_y)
   if (toruKoma) {
     toruKoma.motigoma = true
+    toruKoma.x = null
+    toruKoma.y = null
     toruKoma.owner = target.owner
+    moves.setGotKoma(move.id, toruKoma)
   }
 
   target.name = move.koma // corresponds naru process it to change koma name
   target.x = move.to_x
   target.y = move.to_y
+
+  if (move.utsu) {
+    target.motigoma = false
+  }
   // TODO utsu
 }
+
+const toggleOwner = (owner) => owner === 'sente'? 'gote' : 'sente'
 
 const applyPrevMove = (komas, move) => {
   var target = getKomaByPosition(komas, move.to_x, move.to_y)
   // todo raise koma not found exception
 
+  var gotKoma = moves.getGotKomaOnMove(move.id)
+  if (gotKoma) {
+    gotKoma.motigoma = false
+    gotKoma.x = move.to_x
+    gotKoma.y = move.to_y
+    gotKoma.owner = toggleOwner(gotKoma.owner)
+  }
+
   target.name = move.koma // corresponds naru process it to change koma name
   target.x = move.from_x
   target.y = move.from_y
-  // TODO utsu
+
+  if (move.utsu) {
+    motigoma = true
+  }
 }
 
 const komas = (state = [], action, move) => {

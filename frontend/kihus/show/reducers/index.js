@@ -1,13 +1,14 @@
 import { combineReducers } from 'redux'
 import komas, * as fromKomas from './komas.js'
+import moves from '../moves.js'
 
 const getMoveForKomas = (index, action) => {
   switch(action.type) {
     case 'next_move':
-      return index == 0? null : gon.moves[index - 1]
+      return moves.getMoveForKomas(index - 1)
       break
     case 'prev_move':
-      return gon.moves[index]
+      return moves.getMoveForKomas(index)
       break
   }
 }
