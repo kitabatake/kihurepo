@@ -13,7 +13,6 @@ class Moves {
 
   setGotKoma(moveId, koma) {
     this.gotKomasEachMoves[moveId] = koma
-    console.log(this.gotKomasEachMoves)
   }
 
   getMoveForKomas(index) {
@@ -25,6 +24,10 @@ class Moves {
 
   getGotKomaOnMove(move) {
     return this.gotKomasEachMoves[move]
+  }
+
+  NumToOwner(num) {
+    return (num % 2 == 1)? 'sente' : 'gote'
   }
 }
 

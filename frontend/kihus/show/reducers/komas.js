@@ -45,17 +45,22 @@ export const getKomaByPosition = (komas, x, y) => {
   return target
 }
 
-const getKomadaiKoma = (name, owner) => {
+const getKomadaiKoma = (komas, name, owner) => {
   var target = null
   komas.forEach(koma => {
     if (koma.motigoma && koma.name === name && koma.owner === owner) target = koma
   })
-  target
+  return target
 }
 
 const applyNextMove = (komas, move) => {
-  var target = getKomaByPosition(komas, move.from_x, move.from_y)
-  // if uts get koma by name from komadai
+  var target
+  if (move.utsu) {
+    target = getKomadaiKoma(komas, move.koma, moves.NumToOwner(move.num))
+  }
+  else {
+    target = getKomaByPosition(komas, move.from_x, move.from_y)
+  }
 
   var toruKoma = getKomaByPosition(komas, move.to_x, move.to_y)
   if (toruKoma) {
