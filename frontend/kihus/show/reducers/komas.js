@@ -78,14 +78,12 @@ const applyNextMove = (komas, move) => {
   if (move.utsu) {
     target.motigoma = false
   }
-  // TODO utsu
 }
 
 const toggleOwner = (owner) => owner === 'sente'? 'gote' : 'sente'
 
 const applyPrevMove = (komas, move) => {
   var target = getKomaByPosition(komas, move.to_x, move.to_y)
-  // todo raise koma not found exception
 
   var gotKoma = moves.getGotKomaOnMove(move.id)
   if (gotKoma) {
@@ -100,7 +98,7 @@ const applyPrevMove = (komas, move) => {
   target.y = move.from_y
 
   if (move.utsu) {
-    motigoma = true
+    target.motigoma = true
   }
 }
 

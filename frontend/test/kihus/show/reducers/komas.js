@@ -200,6 +200,43 @@ describe('reducers/komas', () => {
 
     })
 
+    it('should process utsu', () => {
+      var move = {
+        num: 3,
+        from_x: null,
+        from_y: null,
+        to_x: 5,
+        to_y: 5,
+        koma: 'hu',
+        utsu: true
+      }
+      var state = initMotigomaCase()
+      state = reducer(
+        state,
+        {
+          type: 'next_move'
+        },
+        move
+      )
+
+      var hu = fromKomas.getKomaByPosition(state, 5, 5)
+      expect(hu.x).to.be(5)
+      expect(hu.y).to.be(5)
+      expect(hu.motigoma).to.be(false)
+
+      state = reducer(
+        state,
+        {
+          type: 'prev_move'
+        },
+        move
+      )
+
+      expect(hu.x).to.be(null)
+      expect(hu.y).to.be(null)
+      expect(hu.motigoma).to.be(true)
+    })
+
   })
 })
 
