@@ -16,8 +16,10 @@ class Kihu < ApplicationRecord
     }
 
     moves = []
+    moves_num = 1
     parsed[:moves].each do |move|
       m = {
+        num: moves_num,
         koma: move[:koma],
         to_x: move[:to][:x],
         to_y: move[:to][:y],
@@ -30,6 +32,7 @@ class Kihu < ApplicationRecord
         m[:from_y] = move[:from][:y]
       end
       moves << m
+      moves_num += 1
     end
 
     result[:moves] = moves

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160818133552) do
+ActiveRecord::Schema.define(version: 20160828081811) do
 
   create_table "kihus", force: :cascade do |t|
     t.boolean  "won"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20160818133552) do
     t.integer  "time"
     t.boolean  "naru"
     t.boolean  "utsu"
+    t.integer  "num"
     t.index ["kihu_id"], name: "index_moves_on_kihu_id"
   end
 
