@@ -1,3 +1,5 @@
+import moves from '../moves.js'
+
 const toggleOwner = (owner) => owner === 'sente'? 'gote' : 'sente'
 
 const processNextMove = (state, move) => {
@@ -9,6 +11,7 @@ const processNextMove = (state, move) => {
   }
 
   if (state.x === move.to_x && state.y === move.to_y) {
+    moves.setGotKoma(move.id, state)
     return Object.assign({}, state, {
       x: null,
       y: null,
@@ -33,7 +36,10 @@ const processPrevMove = (state, move) => {
     return nextState
   }
 
-  // TODO restore taken koma
+  var gotKoma = moves.getGotKomaOnMove(move.id)
+  if (gotKoma && gotKoma.id === state.id) {
+    return Object.assign({}, gotKoma)
+  }
 
   return state
 }

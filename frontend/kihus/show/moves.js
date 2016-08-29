@@ -22,8 +22,8 @@ class Moves {
     return this.moves[index]
   }
 
-  getGotKomaOnMove(move) {
-    return this.gotKomasEachMoves[move]
+  getGotKomaOnMove(moveId) {
+    return this.gotKomasEachMoves[moveId]
   }
 
   NumToOwner(num) {
