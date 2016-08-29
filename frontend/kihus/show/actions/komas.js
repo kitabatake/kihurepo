@@ -44,10 +44,3 @@ export const initiatesKomas = (dispatch) => {
     komas: getDefaultKomas()
   })
 }
-
-// export const moveKoma = (dispatch) => {
-//   dispatch({
-//     type: 'move_koma',
-//     move: gon.moves
-//   })
-// }

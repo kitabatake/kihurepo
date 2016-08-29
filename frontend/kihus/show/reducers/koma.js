@@ -3,6 +3,14 @@ import moves from '../moves.js'
 const toggleOwner = (owner) => owner === 'sente'? 'gote' : 'sente'
 
 const processNextMove = (state, move) => {
+  if (move.utsu && state.id === move.utsuKomaId) { 
+    return Object.assign({}, state, {
+      motigoma: false,
+      x: move.to_x,
+      y: move.to_y
+    })
+  }
+
   if (state.x === move.from_x && state.y === move.from_y) {
     return Object.assign({}, state, {
       x: move.to_x,
