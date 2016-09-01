@@ -1,4 +1,4 @@
-import * as ActionTypes from 'index.js'
+import * as ActionTypes from './index.js'
 
 var currentKomaId = 1
 const getKomaId = () => currentKomaId++

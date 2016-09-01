@@ -1,5 +1,5 @@
 import moves from '../moves.js'
-import * as ActionTypes from 'index.js'
+import * as ActionTypes from './index.js'
 
 const getMove = (movesIndex, type) => {
   switch(type) {
