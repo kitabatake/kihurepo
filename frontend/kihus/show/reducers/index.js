@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux'
 import komas, * as fromKomas from './komas.js'
+import * as ActionTypes from '../actions'
 
 const movesIndex = (state = 0, action) => {
   switch(action.type) {
-    case 'prev_move':
-    case 'next_move':
+    case ActionTypes.PREV_MOVE:
+    case ActionTypes.NEXT_MOVE:
       return action.movesIndex
     default:
       return state

@@ -1,3 +1,5 @@
+import * as ActionTypes from 'index.js'
+
 var currentKomaId = 1
 const getKomaId = () => currentKomaId++
 
@@ -40,7 +42,7 @@ export const getDefaultKomas = () => {
 
 export const initiatesKomas = (dispatch) => {
   dispatch({
-    type: 'initiate_komas',
+    type: ActionTypes.INITIATE_KOMAS,
     komas: getDefaultKomas()
   })
 }

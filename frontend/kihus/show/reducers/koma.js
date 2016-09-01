@@ -1,4 +1,5 @@
 import moves from '../moves.js'
+import * as ActionTypes from '../actions'
 
 const toggleOwner = (owner) => owner === 'sente'? 'gote' : 'sente'
 
@@ -61,9 +62,9 @@ const koma = (state = {
 }, action) => {
   var move = action.move
   switch(action.type) {
-    case 'next_move':
+    case ActionTypes.NEXT_MOVE:
       return processNextMove(state, move)
-    case 'prev_move':
+    case ActionTypes.PREV_MOVE:
       return processPrevMove(state, move)
     default:
       return state

@@ -1,5 +1,6 @@
 import expect from 'expect.js'
 import reducer, * as fromKomas from '../../../../kihus/show/reducers/komas.js'
+import * as ActionTypes from '../../../../kihus/show/actions'
 
 var currentKomaId = 1
 const createKoma = (params = {}) => {
@@ -54,7 +55,7 @@ describe('reducers/komas', () => {
       var state = reducer(
         createState(),
         {
-          type: 'next_move',
+          type: ActionTypes.NEXT_MOVE,
           move: {
             num: 1,
             from_x: 7,
@@ -73,7 +74,7 @@ describe('reducers/komas', () => {
       var state = reducer(
         createState(),
         {
-          type: 'next_move',
+          type: ActionTypes.NEXT_MOVE,
           move: {
             num: 1,
             from_x: 7,
@@ -102,7 +103,7 @@ describe('reducers/komas', () => {
       state = reducer(
         state,
         {
-          type: 'next_move',
+          type: ActionTypes.NEXT_MOVE,
           move: {
             num: 1,
             from_x: null,
@@ -127,7 +128,7 @@ describe('reducers/komas', () => {
       var state = reducer(
         createState(),
         {
-          type: 'prev_move',
+          type: ActionTypes.PREV_MOVE,
           move: {
             num: 1,
             from_x: 7,
@@ -154,7 +155,7 @@ describe('reducers/komas', () => {
       var state = reducer(
         createState(),
         {
-          type: 'next_move',
+          type: ActionTypes.NEXT_MOVE,
           move: move
         }
       )
@@ -162,7 +163,7 @@ describe('reducers/komas', () => {
       state = reducer(
         state,
         {
-          type: 'prev_move',
+          type: ActionTypes.PREV_MOVE,
           move: move
         }
       )
@@ -194,7 +195,7 @@ describe('reducers/komas', () => {
       state = reducer(
         state,
         {
-          type: 'next_move',
+          type: ActionTypes.NEXT_MOVE,
           move: move
         }
       )
@@ -207,7 +208,7 @@ describe('reducers/komas', () => {
       state = reducer(
         state,
         {
-          type: 'prev_move',
+          type: ActionTypes.PREV_MOVE,
           move: move
         }
       )

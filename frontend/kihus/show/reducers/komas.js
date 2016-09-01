@@ -1,5 +1,6 @@
 import moves from '../moves'
 import koma, * as fromKoma from './koma.js'
+import * as ActionTypes from '../actions'
 
 
 export const getKomaByPosition = (komas, x, y) => {
@@ -39,13 +40,13 @@ const applyPrevMove = (komas, action) => {
 
 const komas = (state = [], action) => {
   switch(action.type) {
-    case 'initiate_komas':
+    case ActionTypes.INITIATE_KOMAS:
       return action.komas
       break
-    case 'next_move':
+    case ActionTypes.NEXT_MOVE:
       return applyNextMove(state, action)
       break
-    case 'prev_move':
+    case ActionTypes.PREV_MOVE:
       return applyPrevMove(state, action)
       break
     default:
