@@ -1,42 +1,43 @@
 import expect from 'expect.js'
 import reducer, * as fromKomas from '../../../../kihus/show/reducers/komas.js'
+import * as ActionTypes from '../../../../kihus/show/actions'
 
-// get motigoma case state
-// teban: sente,
-// moitogma: hu,
-// num: 2
-const initMotigomaCase = () => {
-  var state = reducer([], {
-    type: 'initiate_komas'
+var currentKomaId = 1
+const createKoma = (params = {}) => {
+  return Object.assign(
+    {
+      id: currentKomaId++,
+      x: 1,
+      y: 1,
+      name: 'hu',
+      owner: 'sente',
+      motigoma: false
+    },
+    params
+  )
+}
+
+// - sente
+//   - 7, 7, hu
+//   - 2, 8, hu
+// - gote
+//   - 7, 3, hu
+//   - 1, 1, kin
+const createState = (additional = []) => {
+  var defaults = []
+  defaults.push(createKoma({x: 7, y: 7}))
+  defaults.push(createKoma({x: 2, y: 8}))
+  defaults.push(createKoma({x: 7, y: 3, owner: 'gote'}))
+  defaults.push(createKoma({x: 1, y: 1, owner: 'gote', name: 'kin'}))
+  return [...defaults, ...additional]
+}
+
+const getKomaById = (komas, id) => {
+  var target = null
+  komas.forEach(k => {
+    if (k.id === id) target = k
   })
-
-  state = reducer(
-    state,
-    {
-      type: 'next_move'
-    },
-    {
-      num: 1,
-      from_x: 7,
-      from_y: 7,
-      to_x: 7,
-      to_y: 3
-    }
-  )
-
-  return reducer(
-    state,
-    {
-      type: 'next_move'
-    },
-    {
-      num: 2,
-      from_x: 1,
-      from_y: 3,
-      to_x: 1,
-      to_y: 4
-    }
-  )
+  return target
 }
 
 describe('reducers/komas', () => {
@@ -47,87 +48,71 @@ describe('reducers/komas', () => {
         reducer(undefined, {})
       ).to.eql([])
     })
-
-    it('should initiates komas', () => {
-      var komas = reducer([], {
-        type: 'initiate_komas'
-      })
-
-      var senteKomasNum = 0, goteKomasNum = 0
-      komas.forEach((koma) => {
-        if (koma.owner === 'sente') senteKomasNum++
-        if (koma.owner === 'gote') goteKomasNum++
-      })
-
-      expect(senteKomasNum).to.be(20)
-      expect(goteKomasNum).to.be(20)
-    })
   })
 
   describe('next_move action', () => {
     it('should apply move', () => {
-      var defaults = reducer([], {
-        type: 'initiate_komas'
-      })
-
-      var before = fromKomas.getKomaByPosition(defaults, 7, 7)
-      var moved = reducer(
-        defaults,
+      var state = reducer(
+        createState(),
         {
-          type: 'next_move'
-        },
-        {
-          num: 1,
-          from_x: 7,
-          from_y: 7,
-          to_x: 7,
-          to_y: 6
+          type: ActionTypes.NEXT_MOVE,
+          move: {
+            num: 1,
+            from_x: 7,
+            from_y: 7,
+            to_x: 7,
+            to_y: 6
+          }
         }
       )
 
-      after = fromKomas.getKomaByPosition(moved, 7, 6)
-      expect(after).to.be(before)
+      var movedKoma = fromKomas.getKomaByPosition(state, 7, 6)
+      expect(movedKoma).to.be.ok()
     })
 
     it('should process toru', () => {
-      var defaults = reducer([], {
-        type: 'initiate_komas'
-      })
-
-      var torareruKoma = fromKomas.getKomaByPosition(defaults, 7, 3)
-      reducer(
-        defaults,
+      var state = reducer(
+        createState(),
         {
-          type: 'next_move'
-        },
-        {
-          num: 1,
-          from_x: 7,
-          from_y: 7,
-          to_x: 7,
-          to_y: 3
+          type: ActionTypes.NEXT_MOVE,
+          move: {
+            num: 1,
+            from_x: 7,
+            from_y: 7,
+            to_x: 7,
+            to_y: 3
+          }
         }
       )
 
-      expect(torareruKoma.owner).to.be('sente')
-      expect(torareruKoma.motigoma).to.be(true)
+      var takenKoma = fromKomas.getKomadaiKoma(state, 'hu', 'sente')
+      expect(takenKoma.owner).to.be('sente')
+      expect(takenKoma.motigoma).to.be(true)
     })
 
     it('should process utsu', () => {
-      var state = initMotigomaCase()
+      var state = createState([
+        createKoma({
+          x: null,
+          y: null,
+          motigoma: true,
+          owner: 'sente'
+        })
+      ])
+      
       state = reducer(
         state,
         {
-          type: 'next_move'
-        },
-        {
-          num: 3,
-          from_x: null,
-          from_y: null,
-          to_x: 5,
-          to_y: 5,
-          koma: 'hu',
-          utsu: true
+          type: ActionTypes.NEXT_MOVE,
+          move: {
+            num: 1,
+            from_x: null,
+            from_y: null,
+            to_x: 5,
+            to_y: 5,
+            name: 'hu',
+            utsu: true
+          }
         }
       )
 
@@ -140,34 +125,25 @@ describe('reducers/komas', () => {
 
   describe('prev_move action', () => {
     it('should apply move', () => {
-      var defaults = reducer([], {
-        type: 'initiate_komas'
-      })
-
-      var before = fromKomas.getKomaByPosition(defaults, 7, 7)
-      var moved = reducer(
-        defaults,
+      var state = reducer(
+        createState(),
         {
-          type: 'prev_move'
-        },
-        {
-          num: 1,
-          from_x: 7,
-          from_y: 8,
-          to_x: 7,
-          to_y: 7
+          type: ActionTypes.PREV_MOVE,
+          move: {
+            num: 1,
+            from_x: 7,
+            from_y: 8,
+            to_x: 7,
+            to_y: 7
+          }
         }
       )
 
-      after = fromKomas.getKomaByPosition(moved, 7, 8)
-      expect(after).to.be(before)
+      var moved = fromKomas.getKomaByPosition(state, 7, 8)
+      expect(moved).to.be.ok()
     })
 
     it('is prev toru case', () => {
-      var defaults = reducer([], {
-        type: 'initiate_komas'
-      })
-
       var move = {
         num: 1,
         from_x: 7,
@@ -175,68 +151,73 @@ describe('reducers/komas', () => {
         to_x: 7,
         to_y: 3
       }
-      var torareruKoma = fromKomas.getKomaByPosition(defaults, 7, 3)
-      reducer(
-        defaults,
+
+      var state = reducer(
+        createState(),
         {
-          type: 'next_move'
-        },
-        move
+          type: ActionTypes.NEXT_MOVE,
+          move: move
+        }
       )
 
-      expect(torareruKoma.owner).to.be('sente')
-      expect(torareruKoma.motigoma).to.be(true)
-
-      reducer(
-        defaults,
+      state = reducer(
+        state,
         {
-          type: 'prev_move'
-        },
-        move
+          type: ActionTypes.PREV_MOVE,
+          move: move
+        }
       )
 
-      expect(torareruKoma.owner).to.be('gote')
-      expect(torareruKoma.motigoma).to.be(false)
-
+      var restoredKoma = fromKomas.getKomaByPosition(state, 7, 3)
+      expect(restoredKoma.owner).to.be('gote')
+      expect(restoredKoma.motigoma).to.be(false)
     })
 
     it('should process utsu', () => {
       var move = {
-        num: 3,
+        num: 1,
         from_x: null,
         from_y: null,
         to_x: 5,
         to_y: 5,
-        koma: 'hu',
+        name: 'hu',
         utsu: true
       }
-      var state = initMotigomaCase()
+       var state = createState([
+        createKoma({
+          x: null,
+          y: null,
+          motigoma: true,
+          owner: 'sente'
+        })
+      ])
+      
       state = reducer(
         state,
         {
-          type: 'next_move'
-        },
-        move
+          type: ActionTypes.NEXT_MOVE,
+          move: move
+        }
       )
 
-      var hu = fromKomas.getKomaByPosition(state, 5, 5)
-      expect(hu.x).to.be(5)
-      expect(hu.y).to.be(5)
-      expect(hu.motigoma).to.be(false)
+      var uttaKoma = fromKomas.getKomaByPosition(state, 5, 5)
+      expect(uttaKoma.x).to.be(5)
+      expect(uttaKoma.y).to.be(5)
+      expect(uttaKoma.motigoma).to.be(false)
 
       state = reducer(
         state,
         {
-          type: 'prev_move'
-        },
-        move
+          type: ActionTypes.PREV_MOVE,
+          move: move
+        }
       )
 
-      expect(hu.x).to.be(null)
-      expect(hu.y).to.be(null)
-      expect(hu.motigoma).to.be(true)
+      var restoredKoma = getKomaById(state, uttaKoma.id)
+      expect(restoredKoma.x).to.be(null)
+      expect(restoredKoma.y).to.be(null)
+      expect(restoredKoma.motigoma).to.be(true)
     })
-
   })
 })
 

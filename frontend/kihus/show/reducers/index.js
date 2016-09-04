@@ -1,42 +1,21 @@
 import { combineReducers } from 'redux'
 import komas, * as fromKomas from './komas.js'
-import moves from '../moves.js'
+import * as ActionTypes from '../actions'
 
-const getMoveForKomas = (index, action) => {
+const movesIndex = (state = 0, action) => {
   switch(action.type) {
-    case 'next_move':
-      return moves.getMoveForKomas(index - 1)
-      break
-    case 'prev_move':
-      return moves.getMoveForKomas(index)
-      break
-  }
-}
-
-
-const movesIndex = (state, action) => {
-  switch(action.type) {
-    case 'prev_move':
-      return state == 0? state : state - 1
-      break
-    case 'next_move':
-    // TODO handle over moves size
-      return state + 1
-      break
+    case ActionTypes.PREV_MOVE:
+    case ActionTypes.NEXT_MOVE:
+      return action.movesIndex
     default:
       return state
   }
 }
 
-const reducer = (state = {
-  movesIndex: 0,
-  komas: []
-}, action) => {
-  var nextState = {}
-  nextState.movesIndex = movesIndex(state.movesIndex, action)
-  nextState.komas = komas(state.komas, action, getMoveForKomas(nextState.movesIndex, action))
-  return nextState
-};
+const reducer = combineReducers({
+  movesIndex,
+  komas
+})
 
 export default reducer
 

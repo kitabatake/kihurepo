@@ -15,15 +15,15 @@ class Moves {
     this.gotKomasEachMoves[moveId] = koma
   }
 
-  getMoveForKomas(index) {
+  getMove(index) {
     if (index < 0 || index >= this.moves.length) {
       return null
     }
     return this.moves[index]
   }
 
-  getGotKomaOnMove(move) {
-    return this.gotKomasEachMoves[move]
+  getGotKomaOnMove(moveId) {
+    return this.gotKomasEachMoves[moveId]
   }
 
   NumToOwner(num) {
