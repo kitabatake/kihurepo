@@ -2,8 +2,7 @@ import React from 'react';
 import Ban from '../components/ban.jsx'
 import Operator from '../components/operator.jsx'
 import Komadai from '../components/komadai.jsx'
-// import Komadai from './komadai.jsx'
-// import Koma from '../komas/koma.js'
+import CommentBox from '../components/CommentBox.jsx'
 
 const App = React.createClass({
   render: function() {
@@ -15,6 +14,7 @@ const App = React.createClass({
         <Komadai
           owner='gote' />
         <Operator />
+        <CommentBox />
       </div>
     )
   }

@@ -28,7 +28,6 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default Komadai
 Komadai = connect(
   mapStateToProps
 )(Komadai)
