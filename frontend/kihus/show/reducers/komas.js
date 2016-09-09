@@ -1,7 +1,6 @@
 import koma, * as fromKoma from './koma.js'
 import * as ActionTypes from '../actions'
 
-
 export const getKomaByPosition = (komas, x, y) => {
   var target = null
   komas.forEach(k => {

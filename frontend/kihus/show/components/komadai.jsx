@@ -7,6 +7,7 @@ var Komadai = React.createClass({
     this.props.komas.forEach(koma => {
       komas.push(
         <Koma
+          key={koma.id}
           owner={koma.owner}
           name={koma.name} />
       )
