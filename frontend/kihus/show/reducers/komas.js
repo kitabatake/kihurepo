@@ -10,10 +10,10 @@ export const getKomaByPosition = (komas, x, y) => {
   return target
 }
 
-export const getKomadaiKoma = (komas, name, owner) => {
+export const getKomadaiKoma = (komas, koma, owner) => {
   var target = null
   komas.forEach(k => {
-    if (k.motigoma && k.name === name && k.owner === owner) target = k
+    if (k.motigoma && k.name === koma && k.owner === owner) target = k
   })
   return target
 }
@@ -25,7 +25,7 @@ const numToOwner = (num) => {
 const applyNextMove = (komas, action) => {
   var move = action.move
   if (move.utsu) {
-    let utsuKoma = getKomadaiKoma(komas, move.name, numToOwner(move.num))
+    let utsuKoma = getKomadaiKoma(komas, move.koma, numToOwner(move.num))
     action.move.utsuKomaId = utsuKoma.id
   }
   

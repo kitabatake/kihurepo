@@ -110,7 +110,7 @@ describe('reducers/komas', () => {
             from_y: null,
             to_x: 5,
             to_y: 5,
-            name: 'hu',
+            koma: 'hu',
             utsu: true
           }
         }
@@ -180,7 +180,7 @@ describe('reducers/komas', () => {
         from_y: null,
         to_x: 5,
         to_y: 5,
-        name: 'hu',
+        koma: 'hu',
         utsu: true
       }
        var state = createState([
