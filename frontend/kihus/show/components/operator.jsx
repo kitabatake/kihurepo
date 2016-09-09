@@ -1,14 +1,11 @@
 import React from 'react'
-import { connect } from 'react-redux'
-
-import { nextMove, prevMove } from '../actions/moves.js'
 
 var Operator = React.createClass({
   handleNextMove: function() {
-    this.props.nextMove(this.props.movesIndex)
+    this.props.handleNextMove(this.props.nextMove)
   },
   handlePrevMove: function() {
-    this.props.prevMove(this.props.movesIndex)
+    this.props.handlePrevMove(this.props.appliedMove)
   },
   render: function() {
     return <div id='moves-operator' >
@@ -21,25 +18,5 @@ var Operator = React.createClass({
     </div>
   }
 })
-
-const mapStateToProps = (state) => {
-  return {movesIndex: state.movesIndex}
-}
-
-const dispatchProps = (dispatch) => {
-  return {
-    nextMove: (movesIndex) => {
-      nextMove(dispatch, movesIndex)
-    },
-    prevMove: () => {
-      prevMove(dispatch, movesIndex)
-    }
-  }
-}
-
-Operator = connect(
-  mapStateToProps,
-  dispatchProps
-)(Operator)
 
 export default Operator

@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import { getMotigomas } from '../reducers/index.js'
 import Koma from './koma.jsx'
 
 var Komadai = React.createClass({
@@ -21,15 +19,5 @@ var Komadai = React.createClass({
     </div>
   }
 })
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    komas: getMotigomas(state, ownProps.owner)
-  }
-}
-
-Komadai = connect(
-  mapStateToProps
-)(Komadai)
 
 export default Komadai

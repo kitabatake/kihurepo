@@ -1,31 +1,33 @@
-import moves from '../moves.js'
 import * as ActionTypes from './index.js'
 
-const getMove = (movesIndex, type) => {
-  switch(type) {
-    case ActionTypes.NEXT_MOVE:
-      return moves.getMove(movesIndex - 1)
-      break
-    case ActionTypes.PREV_MOVE:
-      return moves.getMove(movesIndex)
-      break
-  }
-}
+// const getMove = (movesIndex, type) => {
+//   switch(type) {
+//     case ActionTypes.NEXT_MOVE:
+//       return moves.getMove(movesIndex - 1)
+//       break
+//     case ActionTypes.PREV_MOVE:
+//       return moves.getMove(movesIndex)
+//       break
+//   }
+// }
 
-export const nextMove = (dispatch, movesIndex) => {
-  movesIndex++
+export const nextMove = (dispatch, move) => {
   dispatch ({
     type: ActionTypes.NEXT_MOVE,
-    move: getMove(movesIndex, ActionTypes.NEXT_MOVE),
-    movesIndex: movesIndex
+    move: move
   })
 }
 
-export const prevMove = (dispatch, movesIndex) => {
-  movesIndex--
+export const prevMove = (dispatch, move) => {
   dispatch ({
     type: ActionTypes.PREV_MOVE,
-    move: getMove(movesIndex, ActionTypes.PREV_MOVE),
-    movesIndex: movesIndex
+    move: move
+  })
+}
+
+export const initiatesMoves = (dispatch, moves) => {
+  dispatch({
+    type: ActionTypes.INITIATE_MOVES,
+    moves: moves
   })
 }

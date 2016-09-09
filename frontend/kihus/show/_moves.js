@@ -25,10 +25,6 @@ class Moves {
   getGotKomaOnMove(moveId) {
     return this.gotKomasEachMoves[moveId]
   }
-
-  NumToOwner(num) {
-    return (num % 2 == 1)? 'sente' : 'gote'
-  }
 }
 
 const moves = new Moves()

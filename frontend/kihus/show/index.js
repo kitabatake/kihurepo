@@ -6,9 +6,8 @@ import {Provider} from 'react-redux'
 import App from './containers/app.jsx'
 import reducer from './reducers/index.js'
 import {initiatesKomas} from './actions/komas.js'
-import moves from './moves'
+import {initiatesMoves} from './actions/moves.js'
 
-moves.setMoves(gon.moves)
 var store = createStore(reducer)
 
 const render = () => {
@@ -23,3 +22,4 @@ const render = () => {
 render()
 store.subscribe(render)
 initiatesKomas(store.dispatch)
+initiatesMoves(store.dispatch, gon.moves)

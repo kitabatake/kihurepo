@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import Koma from './koma.jsx'
 import { getOnBanKomas } from '../reducers/index.js'
 
@@ -37,16 +36,5 @@ var Ban = React.createClass({
     )
   }
 })
-
-
-const mapStateToProps = (state) => {
-  return {
-    komas: getOnBanKomas(state)
-  }
-}
-
-Ban = connect(
-  mapStateToProps
-)(Ban)
 
 export default Ban

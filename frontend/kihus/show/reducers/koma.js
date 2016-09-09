@@ -1,5 +1,20 @@
-import moves from '../moves.js'
 import * as ActionTypes from '../actions'
+
+class Moves {
+  constructor() {
+    this.gotKomasEachMoves = []
+  }
+
+  setGotKoma(moveId, koma) {
+    this.gotKomasEachMoves[moveId] = koma
+  }
+
+  getGotKomaOnMove(moveId) {
+    return this.gotKomasEachMoves[moveId]
+  }
+}
+
+const moves = new Moves()
 
 const toggleOwner = (owner) => owner === 'sente'? 'gote' : 'sente'
 

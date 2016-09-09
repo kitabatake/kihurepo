@@ -1,4 +1,3 @@
-import moves from '../moves'
 import koma, * as fromKoma from './koma.js'
 import * as ActionTypes from '../actions'
 
@@ -19,10 +18,14 @@ export const getKomadaiKoma = (komas, name, owner) => {
   return target
 }
 
+const numToOwner = (num) => {
+  return (num % 2 == 1)? 'sente' : 'gote'
+}
+
 const applyNextMove = (komas, action) => {
   var move = action.move
   if (move.utsu) {
-    let utsuKoma = getKomadaiKoma(komas, move.name, moves.NumToOwner(move.num))
+    let utsuKoma = getKomadaiKoma(komas, move.name, numToOwner(move.num))
     action.move.utsuKomaId = utsuKoma.id
   }
   
