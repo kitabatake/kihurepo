@@ -3,25 +3,36 @@ import * as ActionTypes from './index.js'
 var currentKomaId = 1
 const getKomaId = () => currentKomaId++
 
+const createKoma = (params = {}) => {
+  return Object.assign(
+    {
+      id: getKomaId(),
+      motigoma: false,
+      gotMovesIndexes: []
+    },
+    params
+  )
+}
+
 const getDefaultKomasEachOwner = (owner, getX, getY) => {
   var komas = []
   for (let i = 0; i < 9; i++) {
-    komas.push({
-      id: getKomaId(), x: getX(i + 1), y: getY(7), name: 'hu', owner: owner, motigoma: false
-    })
+    komas.push(createKoma({
+      x: getX(i + 1), y: getY(7), name: 'hu', owner: owner
+    }))
   }
 
-  komas.push({id: getKomaId(), x: getX(1), y: getY(9), name: 'kyousya', owner: owner, motigoma: false})
-  komas.push({id: getKomaId(), x: getX(2), y: getY(9), name: 'keima', owner: owner, motigoma: false})
-  komas.push({id: getKomaId(), x: getX(3), y: getY(9), name: 'gin', owner: owner, motigoma: false})
-  komas.push({id: getKomaId(), x: getX(4), y: getY(9), name: 'kin', owner: owner, motigoma: false})
-  komas.push({id: getKomaId(), x: getX(5), y: getY(9), name: 'ou', owner: owner, motigoma: false})
-  komas.push({id: getKomaId(), x: getX(6), y: getY(9), name: 'kin', owner: owner, motigoma: false})
-  komas.push({id: getKomaId(), x: getX(7), y: getY(9), name: 'gin', owner: owner, motigoma: false})
-  komas.push({id: getKomaId(), x: getX(8), y: getY(9), name: 'keima', owner: owner, motigoma: false})
-  komas.push({id: getKomaId(), x: getX(9), y: getY(9), name: 'kyousya', owner: owner, motigoma: false})
-  komas.push({id: getKomaId(), x: getX(2), y: getY(8), name: 'hisya', owner: owner, motigoma: false})
-  komas.push({id: getKomaId(), x: getX(8), y: getY(8), name: 'kaku', owner: owner, motigoma: false})
+  komas.push(createKoma({x: getX(1), y: getY(9), name: 'kyousya', owner: owner}))
+  komas.push(createKoma({x: getX(2), y: getY(9), name: 'keima', owner: owner}))
+  komas.push(createKoma({x: getX(3), y: getY(9), name: 'gin', owner: owner}))
+  komas.push(createKoma({x: getX(4), y: getY(9), name: 'kin', owner: owner}))
+  komas.push(createKoma({x: getX(5), y: getY(9), name: 'ou', owner: owner}))
+  komas.push(createKoma({x: getX(6), y: getY(9), name: 'kin', owner: owner}))
+  komas.push(createKoma({x: getX(7), y: getY(9), name: 'gin', owner: owner}))
+  komas.push(createKoma({x: getX(8), y: getY(9), name: 'keima', owner: owner}))
+  komas.push(createKoma({x: getX(9), y: getY(9), name: 'kyousya', owner: owner}))
+  komas.push(createKoma({x: getX(2), y: getY(8), name: 'hisya', owner: owner}))
+  komas.push(createKoma({x: getX(8), y: getY(8), name: 'kaku', owner: owner}))
 
   return komas
 }

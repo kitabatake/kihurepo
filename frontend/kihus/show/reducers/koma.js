@@ -44,7 +44,7 @@ const processPrevMove = (state, move) => {
     return nextState
   }
 
-  if (state.gotMovesIndexes.length > 0 && state.gotMovesIndexes[state.gotMovesIndexes - 1] === move.id) {
+  if (state.gotMovesIndexes.length > 0 && state.gotMovesIndexes[state.gotMovesIndexes.length - 1] == move.id) {
     let nextGotMovesIndexes = state.gotMovesIndexes.length === 1? [] : [...state.gotMovesIndexes.pop()]
     return Object.assign({}, state, {
       x: move.to_x,
@@ -54,11 +54,6 @@ const processPrevMove = (state, move) => {
       gotMovesIndexes: nextGotMovesIndexes
     })
   }
-
-  // var gotKoma = moves.getGotKomaOnMove(move.id)
-  // if (gotKoma && gotKoma.id === state.id) {
-  //   return Object.assign({}, gotKoma)
-  // }
 
   return state
 }
