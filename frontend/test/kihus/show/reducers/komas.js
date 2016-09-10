@@ -11,7 +11,8 @@ const createKoma = (params = {}) => {
       y: 1,
       name: 'hu',
       owner: 'sente',
-      motigoma: false
+      motigoma: false,
+      gotMovesIndexes: []
     },
     params
   )
@@ -145,6 +146,7 @@ describe('reducers/komas', () => {
 
     it('is prev toru case', () => {
       var move = {
+        id: 1,
         num: 1,
         from_x: 7,
         from_y: 7,
@@ -175,6 +177,7 @@ describe('reducers/komas', () => {
 
     it('should process utsu', () => {
       var move = {
+        id: 1,
         num: 1,
         from_x: null,
         from_y: null,

@@ -1,21 +1,5 @@
 import * as ActionTypes from '../actions'
 
-class Moves {
-  constructor() {
-    this.gotKomasEachMoves = []
-  }
-
-  setGotKoma(moveId, koma) {
-    this.gotKomasEachMoves[moveId] = koma
-  }
-
-  getGotKomaOnMove(moveId) {
-    return this.gotKomasEachMoves[moveId]
-  }
-}
-
-const moves = new Moves()
-
 const toggleOwner = (owner) => owner === 'sente'? 'gote' : 'sente'
 
 const processNextMove = (state, move) => {
@@ -35,12 +19,12 @@ const processNextMove = (state, move) => {
   }
 
   if (state.x === move.to_x && state.y === move.to_y) {
-    moves.setGotKoma(move.id, state)
     return Object.assign({}, state, {
       x: null,
       y: null,
       motigoma: true,
-      owner: toggleOwner(state.owner)
+      owner: toggleOwner(state.owner),
+      gotMovesIndexes: [...state.gotMovesIndexes, move.id]
     })
   }
 
@@ -60,10 +44,21 @@ const processPrevMove = (state, move) => {
     return nextState
   }
 
-  var gotKoma = moves.getGotKomaOnMove(move.id)
-  if (gotKoma && gotKoma.id === state.id) {
-    return Object.assign({}, gotKoma)
+  if (state.gotMovesIndexes.length > 0 && state.gotMovesIndexes[state.gotMovesIndexes - 1] === move.id) {
+    let nextGotMovesIndexes = state.gotMovesIndexes.length === 1? [] : [...state.gotMovesIndexes.pop()]
+    return Object.assign({}, state, {
+      x: move.to_x,
+      y: move.to_y,
+      motigoma: false,
+      owner: toggleOwner(state.owner),
+      gotMovesIndexes: nextGotMovesIndexes
+    })
   }
+
+  // var gotKoma = moves.getGotKomaOnMove(move.id)
+  // if (gotKoma && gotKoma.id === state.id) {
+  //   return Object.assign({}, gotKoma)
+  // }
 
   return state
 }
@@ -73,7 +68,8 @@ const koma = (state = {
   y: null,
   name: null,
   owner: null,
-  motigoma: false
+  motigoma: false,
+  gotMovesIndexes: []
 }, action) => {
   var move = action.move
   switch(action.type) {
