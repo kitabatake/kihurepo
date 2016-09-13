@@ -1,24 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import moves from '../moves.js'
 
 var CommentBox = React.createClass({
+  getInitialState: function(){
+    return {
+      comment: this.props.initialComment
+    }
+  },
+  handleChange: function(e) {
+    this.setState({comment: e.target.value})
+  },
+  handleUpdateClick: function(e) {
+    this.props.handleCommentUpdate(this.state.comment)
+  },
   render: function() {
     return <div className='comment-box'>
-      <textarea>{this.props.comment}</textarea>
+      <textarea 
+        onChange={this.handleChange}
+        defaultValue={this.state.comment} />
+      <button onClick={this.handleUpdateClick}>
+        Update
+      </button>
     </div>
   }
 })
-
-const mapStateToProps = (state, ownProps) => {
-  const move = moves.getMove(state.movesIndex)
-  return {
-    comment: move.comment
-  }
-}
-
-CommentBox = connect(
-  mapStateToProps
-)(CommentBox)
 
 export default CommentBox

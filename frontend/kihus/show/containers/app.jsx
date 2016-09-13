@@ -6,7 +6,7 @@ import { nextMove, prevMove } from '../actions/moves.js'
 import Ban from '../components/ban.jsx'
 import Operator from '../components/operator.jsx'
 import Komadai from '../components/komadai.jsx'
-// import CommentBox from '../components/CommentBox.jsx'
+import CommentBox from '../components/CommentBox.jsx'
 
 var App = React.createClass({
   render: function() {
@@ -26,6 +26,9 @@ var App = React.createClass({
           appliedMove={this.props.appliedMove}
           handleNextMove={this.props.handleNextMove}
           handlePrevMove={this.props.handlePrevMove} />
+        <CommentBox 
+          handleCommentUpdate={this.props.handleCommentUpdate}
+          initialComment={this.props.appliedMove? this.props.appliedMove.comment : ''} />
       </div>
     )
   }
@@ -49,6 +52,9 @@ const dispatchProps = (dispatch) => {
     },
     handlePrevMove: (move) => {
       prevMove(dispatch, move)
+    },
+    handleCommentUpdate: (comment) => {
+      console.log(comment)
     }
   }
 }
