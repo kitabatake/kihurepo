@@ -9,7 +9,22 @@ import Komadai from '../components/komadai.jsx'
 import CommentBox from '../components/CommentBox.jsx'
 
 var App = React.createClass({
+  updateComment: function(comment) {
+    this.props.updateMove(
+      Object.assign(
+        this.props.appliedMove,
+        {
+          comment: comment
+        }
+      )
+    )
+  },
   render: function() {
+    var commentBox = this.props.appliedMove?
+      <CommentBox 
+          handleCommentUpdate={this.updateComment}
+          initialComment={this.props.appliedMove? this.props.appliedMove.comment : ''} />
+      : null
     return (
       <div>
         <Ban 
@@ -26,9 +41,7 @@ var App = React.createClass({
           appliedMove={this.props.appliedMove}
           handleNextMove={this.props.handleNextMove}
           handlePrevMove={this.props.handlePrevMove} />
-        <CommentBox 
-          handleCommentUpdate={this.props.handleCommentUpdate}
-          initialComment={this.props.appliedMove? this.props.appliedMove.comment : ''} />
+        {commentBox}
       </div>
     )
   }
@@ -53,8 +66,8 @@ const dispatchProps = (dispatch) => {
     handlePrevMove: (move) => {
       prevMove(dispatch, move)
     },
-    handleCommentUpdate: (comment) => {
-      console.log(comment)
+    updateMove: (move) => {
+      console.log(move)
     }
   }
 }
